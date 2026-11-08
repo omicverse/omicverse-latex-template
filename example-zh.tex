@@ -1,0 +1,119 @@
+%% 中文示例：PrimorDecode 论文。编译：latexmk -xelatex example-zh.tex
+\documentclass[brand=primordecode, zh]{pdarticle}
+
+\journalname{PrimorDecode}
+\journalsection{研究报告}
+\articletype{观点}
+\journalinfo{PrimorDecode 预印本，2026 年 11 月}
+\copyrightholder{2026 PrimorDecode 源境解码}
+\licenseline{本文按 CC BY 4.0 许可协议发布。}
+
+\title{PrimorDecode 论文的手稿模版}
+\author{第一作者\affmark{1}，第二作者\affmark{1,2}，通讯作者\affmark{2,*}}
+\affiliation{1}{[院系，单位，城市，国家]}
+\affiliation{2}{[院系，单位，城市，国家]}
+\correspondence{author@example.com}
+\articledoi{10.xxxx/xxxxxx}
+
+\summary{这套模版把 PrimorDecode 和 OmicVerse 的论文排成单栏的手稿版式（定稿时可切换成期刊双栏）：每页左边缘是一条品牌色竖条，里面竖排刊物信息和文章类型；首页左上是品牌 logo，右上角是品牌图形，不放文字，标题上方是一行主色小字写文章类型，摘要排在上下两条细线之间。两个品牌各有一套配色，每种颜色都能用文档类选项改掉。下面的示例正文逐项说明页面的各个部分和对应的命令。}
+\keywords{LaTeX 模版，期刊版式，PrimorDecode，OmicVerse}
+
+\bibliographystyle{numbered}
+
+\begin{document}
+\maketitle
+
+\section{引言}
+
+中文论文在文档类选项里加上 \texttt{zh}，再用 XeLaTeX 编译。版式和英文版一致：每页左边缘一条品牌色竖条；首页左上是 logo，右上角是品牌图形；后续页左上是缩小的 logo，右上是页码，下面一条细线。正文里的引用是主色的上标数字，比如 OmicVerse 框架论文\cite{zeng2024omicverse}和 Scanpy 工具包\cite{wolf2018scanpy}；图表编号（图~\ref{fig:zh}）也是主色链接。
+
+版心宽度和字号参考了 Cell 的 Perspective\cite{guo2026autonomous}，页面设计则不同：页边没有色块，章节标题不转大写，所有品牌元素都用我们自己的：PrimorDecode 带黑洞 O 的字标、OmicVerse 的 DNA logo，以及从这两个 logo 取出来的两套配色。右上角的图形也是自己画的：PrimorDecode 是一张发丝星图，十一个圆相切于一点，亮的一侧线条密、暗的一侧疏，外面绕一条带琥珀色吸积尾迹的倾斜轨道；OmicVerse 是一条从页边伸进来的 DNA 双螺旋，往左渐渐淡去，散成一片像单细胞嵌入图那样的点。中文选项打开后，章节标题不再转成大写，摘要、图、表、专栏的标签换成中文，中文字体依次尝试思源黑体、Noto Sans CJK SC、冬青黑体和苹方，用第一个装了的。
+
+\section{页面结构}
+
+\subsection{标题区}
+
+元信息写在导言区，\texttt{\textbackslash begin\{document\}} 之后紧跟 \texttt{\textbackslash maketitle}。\texttt{\textbackslash articletype} 设定标题上方的一行小字，\texttt{\textbackslash journalsection} 在它后面加一个栏目名，不写就不显示。作者直接写成一行，单位编号用 \texttt{\textbackslash affmark}；每条 \texttt{\textbackslash affiliation} 在作者下方加一行单位。
+
+\subsection{页眉和页脚}
+
+首页页脚有版权方、一行可选的许可说明，右边是页码。从第二页起，页码移到右上角，左上是缩小的 logo，下面一条细线，页脚留空；左边的竖条每页都竖排 \texttt{\textbackslash journalinfo} 设定的刊物信息和文章类型。想换首页右上角的图形，用 \texttt{\textbackslash brandgraphic\{...\}} 写任意 TikZ 图，坐标以页面右上角为原点、单位是英寸；\texttt{\textbackslash brandgraphic\{\}} 则留空。文档类选项 \texttt{design} 可以换成别的页面设计：\texttt{masthead}（首页顶部一条浅色带）、\texttt{panel}（标题区铺一块浅色底板）或 \texttt{classic}（旧的页边色块）。
+
+\begin{figure*}[t]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm, every node/.style={font=\small}]
+  \foreach \x/\lab/\txt in {0/A/{标题区}, 6/B/{正文}, 12/C/{后续页}} {
+    \draw[pdrule, fill=white] (\x,0) rectangle (\x+5,3.4);
+    \fill[pdtab] (\x,0) rectangle (\x+0.18,3.4);
+    \node[anchor=north west, font=\bfseries\small] at (\x+0.3,3.25) {\lab};
+    \node[anchor=north, font=\bfseries\small, text=pdprimary] at (\x+2.6,3.25) {\txt};
+  }
+  % panel A
+  \draw[pdrule] (0.45,2.42) rectangle (1.85,2.75);
+  \node[font=\scriptsize] at (1.15,2.585) {logo};
+  \foreach \i in {0,...,4} \draw[pdsecondary!\the\numexpr100-20*\i\relax!pdprimary, line width=0.4pt] ({4.45-0.766*(0.18+0.04*\i)},{2.42+0.643*(0.18+0.04*\i)}) circle[radius=0.18+0.04*\i];
+  \fill[pdsecondary] (0.45,2.12) rectangle (1.6,2.2);
+  \fill[black!80] (0.45,1.72) rectangle (4.5,1.98);
+  \fill[black!35] (0.45,1.5) rectangle (3.2,1.58);
+  \draw[pdprimary, line width=0.6pt] (0.45,1.34) -- (4.55,1.34);
+  \node[anchor=west, font=\bfseries\scriptsize, text=pdprimary] at (0.45,1.14) {摘要};
+  \foreach \y in {0.84,0.69,0.54} \fill[pdprimary!65] (0.45,\y) rectangle (4.55,\y+0.07);
+  \draw[pdprimary, line width=0.6pt] (0.45,0.36) -- (4.55,0.36);
+  % panel B
+  \fill[pdsecondary] (6.45,2.52) rectangle (6.6,2.67);
+  \fill[pdprimary] (6.72,2.54) rectangle (8.1,2.66);
+  \foreach \y in {2.3,2.1,...,0.4} \fill[black!25] (6.45,\y) rectangle (10.6,\y+0.07);
+  % panel C
+  \draw[pdrule] (12.45,2.48) rectangle (13.45,2.72);
+  \node[font=\scriptsize] at (12.95,2.6) {logo};
+  \node[anchor=east, font=\bfseries\scriptsize, text=pdprimary] at (16.6,2.6) {2};
+  \draw[pdrule] (12.45,2.36) -- (16.6,2.36);
+  \foreach \y in {2.1,1.9,...,0.4} \fill[black!25] (12.45,\y) rectangle (16.6,\y+0.07);
+\end{tikzpicture}}
+\pdcaption{本模版的页面结构}{（A）首页：左边缘是品牌色竖条，左上是 logo，右上角是品牌图形，下面依次是文章类型小字、标题、作者和上下两条细线之间的摘要。（B）单栏正文，章节标题用主色，前面一个辅色小方块；加 \texttt{twocolumn} 选项则排成双栏。（C）后续页：竖条不变，左上是缩小的 logo，右上是页码，下面一条细线。}
+\label{fig:zh}
+\end{figure*}
+
+\section{图、表和专栏}
+
+默认的单栏版式里，\texttt{figure} 和 \texttt{figure*} 都占满版心宽度；加了 \texttt{twocolumn} 之后，\texttt{figure*} 跨两栏，\texttt{figure} 只占一栏。\texttt{\textbackslash pdcaption\{标题\}\{图注\}} 先用主色加粗印出「图 1」和标题，再在下面印正文字号的图注。表的标题在表格上方，\texttt{\textbackslash tablehead} 给表头行铺一层浅主色（表~\ref{tab:zh}）。
+
+\begin{table}[t]
+\pdcaption{两套配色的颜色角色}{}
+\label{tab:zh}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\tablehead \textbf{角色} & \textbf{PrimorDecode} & \textbf{OmicVerse}\\
+\midrule
+色块 & \textcolor[HTML]{0B1230}{\rule{0.8em}{0.8em}} 0B1230 & \textcolor[HTML]{489332}{\rule{0.8em}{0.8em}} 489332\\
+主色 & \textcolor[HTML]{1C2B5A}{\rule{0.8em}{0.8em}} 1C2B5A & \textcolor[HTML]{36682B}{\rule{0.8em}{0.8em}} 36682B\\
+辅色 & \textcolor[HTML]{B85C17}{\rule{0.8em}{0.8em}} B85C17 & \textcolor[HTML]{A8432A}{\rule{0.8em}{0.8em}} A8432A\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+专栏放正文之外的补充材料，比如术语表或实验流程。\texttt{pdbox} 环境自动编号，底色和表头一样是浅主色。
+
+\begin{pdbox}{换颜色}
+把十六进制色值写进文档类选项即可，例如：\par\smallskip
+{\raggedright\ttfamily\footnotesize \textbackslash documentclass[brand=omicverse, zh,\\
+\ \ primary=1F6F8B, secondary=B23A48]\{pdarticle\}\par}\smallskip
+没写的角色保留预设值，浅色底跟着主色变。
+\end{pdbox}
+
+\section{致谢}
+
+在这里写资助和致谢。
+
+\section{作者贡献}
+
+在这里写各位作者的贡献。
+
+\section{利益声明}
+
+在这里写利益声明。
+
+\bibliography{example}
+\end{document}

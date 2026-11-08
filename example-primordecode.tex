@@ -1,0 +1,26 @@
+%% Example: PrimorDecode paper.  Compile: latexmk -pdf example-primordecode.tex
+\documentclass[brand=primordecode]{pdarticle}
+
+\journalname{PrimorDecode}
+\journalsection{Research Report}
+\articletype{Perspective}
+\journalinfo{PrimorDecode Preprint, November 2026}
+\copyrightholder{2026 PrimorDecode}
+\licenseline{Distributed under the terms of the CC BY 4.0 license.}
+
+\title{A manuscript template for\\ PrimorDecode papers}
+\author{First Author,\affmark{1} Second Author,\affmark{1,2} and Corresponding Author\affmark{2,*}}
+\affiliation{1}{[Department, Institution, City, Country]}
+\affiliation{2}{[Department, Institution, City, Country]}
+\correspondence{author@example.com}
+\articledoi{10.xxxx/xxxxxx}
+
+\summary{This template sets PrimorDecode and OmicVerse papers in a single-column manuscript layout, or a two-column journal layout, with a brand logo, a color rail down the page edge, a summary between two rules, and sentence-case colored headings. Each brand has its own color preset, and every color can be changed with a class option. The example text below explains each part of the page and the commands that control it.}
+\keywords{LaTeX template, journal layout, PrimorDecode, OmicVerse}
+
+\bibliographystyle{numbered}
+
+\begin{document}
+\maketitle
+\input{example-body-en}
+\end{document}

@@ -1,0 +1,132 @@
+%% Shared body for example-primordecode.tex and example-omicverse.tex.
+%% The text explains how to use pdarticle.cls; replace it with your paper.
+
+\section{Introduction}
+
+This template typesets papers from PrimorDecode and OmicVerse in a single-column layout for manuscripts and preprints; the class option \texttt{twocolumn} switches to a two-column journal layout for the final version. Every page has a narrow rail in the brand color down its left edge, with the journal line and the article type set vertically in it, so that a single page still shows where the paper comes from and that it is a preprint. The first page carries the brand logo at the top left and a brand graphic, with no lettering, in the top-right corner, then a small colored line with the article type, a large bold title, the author list, and the summary between two thin rules. Later pages carry a smaller logo, the page number at the top right, and a hairline rule. Citations appear as colored superscripts, as in the OmicVerse framework paper\cite{zeng2024omicverse} or the Scanpy toolkit,\cite{wolf2018scanpy} and figure references such as (Figure~\ref{fig:anatomy}) are links in the primary color.
+
+The text block and type sizes follow a Cell Perspective,\cite{guo2026autonomous} but the page design does not: there is no tab on the page edge, headings are in sentence case, and every brand element comes from our own material: the PrimorDecode wordmark with its black-hole O, the OmicVerse DNA logo, and two color presets drawn from those logos. The corner graphics are our own as well. PrimorDecode has a hairline star chart, in which eleven circles touch at one point so that the ring is dense on its lit side, crossed by an orbit with an amber accretion trail; OmicVerse has a double helix that runs off the page edge and, toward the left, dissolves into scattered points like cells in an embedding. Each preset has three color roles. The primary color sets the summary, headings, figure titles, author marks, and links; the secondary color sets the line above the title and the small square before each section heading; the tab color fills the rail. The corner graphic draws on all three.
+
+\begin{figure*}[t]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm, every node/.style={font=\small}]
+  \foreach \x/\lab/\txt in {0/A/{Title block}, 6/B/{Body text}, 12/C/{Later pages}} {
+    \draw[pdrule, fill=white] (\x,0) rectangle (\x+5,3.4);
+    \fill[pdtab] (\x,0) rectangle (\x+0.18,3.4);
+    \node[anchor=north west, font=\bfseries\small] at (\x+0.3,3.25) {\lab};
+    \node[anchor=north, font=\bfseries\small, text=pdprimary] at (\x+2.6,3.25) {\txt};
+  }
+  % panel A
+  \draw[pdrule] (0.45,2.42) rectangle (1.85,2.75);
+  \node[font=\scriptsize] at (1.15,2.585) {logo};
+  \foreach \i in {0,...,4} \draw[pdsecondary!\the\numexpr100-20*\i\relax!pdprimary, line width=0.4pt] ({4.45-0.766*(0.18+0.04*\i)},{2.42+0.643*(0.18+0.04*\i)}) circle[radius=0.18+0.04*\i];
+  \fill[pdsecondary] (0.45,2.12) rectangle (1.6,2.2);
+  \fill[black!80] (0.45,1.72) rectangle (4.5,1.98);
+  \fill[black!35] (0.45,1.5) rectangle (3.2,1.58);
+  \draw[pdprimary, line width=0.6pt] (0.45,1.34) -- (4.55,1.34);
+  \node[anchor=west, font=\bfseries\scriptsize, text=pdprimary] at (0.45,1.14) {Summary};
+  \foreach \y in {0.84,0.69,0.54} \fill[pdprimary!65] (0.45,\y) rectangle (4.55,\y+0.07);
+  \draw[pdprimary, line width=0.6pt] (0.45,0.36) -- (4.55,0.36);
+  % panel B
+  \fill[pdsecondary] (6.45,2.52) rectangle (6.6,2.67);
+  \fill[pdprimary] (6.72,2.54) rectangle (8.1,2.66);
+  \foreach \y in {2.3,2.1,...,0.4} \fill[black!25] (6.45,\y) rectangle (10.6,\y+0.07);
+  % panel C
+  \draw[pdrule] (12.45,2.48) rectangle (13.45,2.72);
+  \node[font=\scriptsize] at (12.95,2.6) {logo};
+  \node[anchor=east, font=\bfseries\scriptsize, text=pdprimary] at (16.6,2.6) {2};
+  \draw[pdrule] (12.45,2.36) -- (16.6,2.36);
+  \foreach \y in {2.1,1.9,...,0.4} \fill[black!25] (12.45,\y) rectangle (16.6,\y+0.07);
+\end{tikzpicture}}
+\pdcaption{Anatomy of a page in this template}{(A) The first page: the color rail down the left edge, the logo at the top left and the brand graphic in the top-right corner, then the line with the article type, the title, the authors, and the summary between two rules. (B) The body in one column, with sentence-case headings in the primary color after a small square in the secondary color; the \texttt{twocolumn} option sets it in two columns. (C) A later page: the rail, a smaller logo, the page number at the top right, and a hairline rule.}
+\label{fig:anatomy}
+\end{figure*}
+
+\section{Page anatomy}
+
+\subsection{Title block}
+
+Write the metadata in the preamble and call \texttt{\textbackslash maketitle} right after \texttt{\textbackslash begin\{document\}}. The command \texttt{\textbackslash articletype} sets the small colored line above the title, and \texttt{\textbackslash journalsection} adds a section name after it; leave it out to drop the name. Authors are written as running text with \texttt{\textbackslash affmark} for their affiliation numbers, and each \texttt{\textbackslash affiliation} adds one line below them. \texttt{\textbackslash correspondence} and \texttt{\textbackslash articledoi} add the e-mail and DOI links, and \texttt{\textbackslash summary} holds the text printed between the two rules under the Summary label.
+
+\subsection{Running heads and footers}
+
+The first page has its own footer with the copyright holder, an optional license line, and the page number at the right. From the second page on, the page number moves to the top right, beside a smaller logo above a hairline rule, and the foot of the page stays empty; the rail repeats the line set by \texttt{\textbackslash journalinfo} and the article type on every page. \texttt{\textbackslash brandgraphic\{...\}} replaces the first-page corner graphic with any TikZ drawing, measured in inches from the top-right corner of the page, and \texttt{\textbackslash brandgraphic\{\}} leaves the corner empty. The class option \texttt{design} selects other page designs: \texttt{masthead} (a tinted band across the top of page 1), \texttt{panel} (a tinted panel behind the title block), or \texttt{classic} (the earlier edge tab).
+
+\subsubsection{Line numbers}
+The class option \texttt{lineno} numbers every line in light gray for review copies; remove it for the final version.
+
+\section{Figures}
+
+In the default single-column layout, \texttt{figure} and \texttt{figure*} both take the full text width; with \texttt{twocolumn}, \texttt{figure*} spans both columns and \texttt{figure} stays in one. The command \texttt{\textbackslash pdcaption\{Title\}\{Legend\}} prints ``Figure 1.'' and the title in bold primary color, and the legend in regular text below. Figure~\ref{fig:anatomy} is drawn with TikZ so that the example compiles without image files; in a paper, \texttt{\textbackslash includegraphics} works as usual.
+
+
+\section{Tables and boxes}
+
+Tables take their caption above the body. The command \texttt{\textbackslash tablehead} tints a header row with a light shade of the primary color, and \texttt{booktabs} rules keep the lines thin (Table~\ref{tab:roles}).
+
+\begin{table}[t]
+\pdcaption{Color roles in the two presets}{}
+\label{tab:roles}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+\tablehead \textbf{Role} & \textbf{PrimorDecode} & \textbf{OmicVerse}\\
+\midrule
+Tab & \textcolor[HTML]{0B1230}{\rule{0.8em}{0.8em}} 0B1230 & \textcolor[HTML]{489332}{\rule{0.8em}{0.8em}} 489332\\
+Primary & \textcolor[HTML]{1C2B5A}{\rule{0.8em}{0.8em}} 1C2B5A & \textcolor[HTML]{36682B}{\rule{0.8em}{0.8em}} 36682B\\
+Secondary & \textcolor[HTML]{B85C17}{\rule{0.8em}{0.8em}} B85C17 & \textcolor[HTML]{A8432A}{\rule{0.8em}{0.8em}} A8432A\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Boxes hold material that sits beside the main argument, such as a glossary or a protocol. The environment \texttt{pdbox} numbers them and fills them with the same light tint.
+
+\begin{pdbox}{Changing the colors}
+Pass hexadecimal values as class options, for example:\par\smallskip
+{\raggedright\ttfamily\footnotesize \textbackslash documentclass[brand=omicverse,\\
+\ \ primary=1F6F8B, secondary=B23A48]\{pdarticle\}\par}\smallskip
+Any role left out keeps its preset value, and the tint follows the primary color.
+\end{pdbox}
+
+\section{Chinese papers}
+
+Add the option \texttt{zh} and compile with XeLaTeX. Headings then stay in their written case, the summary heading, figure labels, and table labels switch to Chinese, and Chinese text is set in the first installed of Source Han Sans SC, Noto Sans CJK SC, Hiragino Sans GB, and PingFang SC.
+
+\section{Building the paper}
+
+Keep the class file, the \texttt{logos} folder, and \texttt{numbered.bst} next to the main \texttt{.tex} file. English papers compile with pdfLaTeX, XeLaTeX, or LuaLaTeX, and Chinese papers need XeLaTeX. A single \texttt{latexmk} call runs BibTeX and repeats the passes until citations and cross-references settle.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[x=1.3cm,y=1cm, every node/.style={font=\footnotesize, inner sep=3.5pt}]
+  \node[draw=pdrule, fill=pdtint, rounded corners=1pt] (a) at (0,0) {\texttt{paper.tex}};
+  \node[draw=pdrule, fill=white, rounded corners=1pt] (b) at (2.6,0) {\texttt{latexmk}};
+  \node[draw=pdrule, fill=pdtint, rounded corners=1pt] (c) at (5.2,0) {\texttt{paper.pdf}};
+  \draw[-{Stealth[length=4pt]}, pdprimary, thick] (a) -- (b);
+  \draw[-{Stealth[length=4pt]}, pdprimary, thick] (b) -- (c);
+  \node[text=pdgray] at (2.6,-0.62) {BibTeX and reruns};
+\end{tikzpicture}
+\pdcaption{A small figure}{The caption takes the width of the text block, or of one column with \texttt{twocolumn}.}
+\label{fig:build}
+\end{figure}
+
+Figure~\ref{fig:build} is a small figure. Figures float to the top or bottom of a page; with \texttt{twocolumn}, a full-width \texttt{figure*} floats to the top of the next page, so define it one page before the place where it should appear.
+
+The logo files are vector PDFs in the \texttt{logos} folder: the OmicVerse logo and the PrimorDecode wordmark. To use another logo, call \texttt{\textbackslash brandlogo[height=0.4in]\{path/to/logo\}} in the preamble; the optional argument sets its size in the running heads.
+
+Page numbers start at 1. A paper that belongs to a numbered series can set the first page with \texttt{\textbackslash setcounter\{page\}\{101\}} before \texttt{\textbackslash maketitle}, and that page still gets the first-page header and footer.
+
+\section{Acknowledgments}
+
+Replace this paragraph with funding and acknowledgments.
+
+\section{Author contributions}
+
+Replace this paragraph with the contributions of each author.
+
+\section{Declaration of interests}
+
+Replace this paragraph with the declaration of interests.
+
+\bibliography{example}

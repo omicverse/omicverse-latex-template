@@ -1,0 +1,15 @@
+# LaTeX build files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.xdv
+*.synctex.gz
+*.toc
+.DS_Store
+# compiled examples (the README images in docs/images are kept)
+*.pdf
+!logos/*.pdf

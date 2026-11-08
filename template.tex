@@ -1,0 +1,43 @@
+%% Blank paper.  English: latexmk -pdf template.tex
+%% Chinese: add "zh" to the class options and run latexmk -xelatex template.tex
+\documentclass[brand=omicverse]{pdarticle}      % or brand=primordecode; options: zh, lineno, a4, twocolumn,
+                                                % design=rail|masthead|panel|classic, primary=HEX, secondary=HEX, tab=HEX
+
+\journalname{OmicVerse}                 % used in the default journal line (on the rail)
+\journalsection{Research Report}        % section name after the article type (optional)
+\articletype{Research Article}          % small colored line above the title, and on the rail
+\journalinfo{OmicVerse Preprint, \today}
+\copyrightholder{\the\year\ OmicVerse}
+\licenseline{}                          % optional second footer line on page 1
+
+\title{Title of the paper}
+\author{First Author,\affmark{1} Second Author,\affmark{2} and Last Author\affmark{1,*}}
+\affiliation{1}{[Department, Institution, City, Country]}
+\affiliation{2}{[Department, Institution, City, Country]}
+\correspondence{author@example.com}
+\articledoi{10.xxxx/xxxxxx}
+
+\summary{Summary text.}
+\keywords{keyword one, keyword two}
+
+\bibliographystyle{numbered}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+Text.\cite{zeng2024omicverse}
+
+\section{Results}
+
+\section{Discussion}
+
+\section{Acknowledgments}
+
+\section{Author contributions}
+
+\section{Declaration of interests}
+
+\bibliography{example}
+\end{document}
