@@ -91,16 +91,27 @@ Text.\cite{zeng2024omicverse}
 
 各种设计的后续页都是左上一个小 logo、右上页码，下面一条细线。
 
-## 版式与行号
+## 双栏版式
+
+定稿时加 `twocolumn`，就排成期刊式的双栏：标题区和摘要横跨整页，正文分两栏，栏间距 13pt，字号和单栏版式一样。
 
 <p align="center">
-  <img src="docs/images/omicverse-twocolumn-p1.png" width="49%" alt="双栏版式第 1 页">
+  <img src="docs/images/omicverse-twocolumn-p1.png" width="49%" alt="双栏版式第 1 页：标题区和摘要横跨整页，正文分两栏">
+  <img src="docs/images/omicverse-twocolumn-p2.png" width="49%" alt="双栏版式第 2 页：一张跨栏图、单栏的表和图，以及参考文献">
+</p>
+<p align="center"><sub><code>\documentclass[brand=omicverse, twocolumn]{pdarticle}</code>，第 1、2 页</sub></p>
+
+- `figure*`、`table*` 跨两栏，会浮动到下一页顶部，要比想放的位置提前一页写。
+- `figure`、`table` 只占一栏。
+
+## 行号
+
+<p align="center">
   <img src="docs/images/omicverse-lineno-p2.png" width="49%" alt="带行号的单栏版式第 2 页">
 </p>
-<p align="center"><sub><code>twocolumn</code>（第 1 页）· <code>lineno</code>（第 2 页）</sub></p>
+<p align="center"><sub><code>lineno</code>，第 2 页</sub></p>
 
-- `twocolumn` 排成两栏，栏间距 13pt。跨栏的 `figure*` 会浮动到下一页顶部，要比想放的位置提前一页写。
-- `lineno` 加浅灰色小号行号：单栏在右边页边，双栏在每栏外侧。
+`lineno` 加浅灰色小号行号：单栏在右边页边，双栏在每栏外侧。
 
 ## 品牌
 

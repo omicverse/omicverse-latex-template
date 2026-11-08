@@ -91,16 +91,27 @@ Pick one with `design=`. Each image below is page 1 of the same example.
 
 Later pages in every design show a small logo at the top left, the page number at the top right and a hairline rule.
 
-## Layout and line numbers
+## Two-column layout
+
+Add `twocolumn` for the final, journal-style version. The title block and summary span both columns, and the body runs in two columns with a 13 pt gap. Type sizes are the same as in the single-column layout.
 
 <p align="center">
-  <img src="docs/images/omicverse-twocolumn-p1.png" width="49%" alt="two-column layout, page 1">
+  <img src="docs/images/omicverse-twocolumn-p1.png" width="49%" alt="two-column layout, page 1: title block and summary across the page, body in two columns">
+  <img src="docs/images/omicverse-twocolumn-p2.png" width="49%" alt="two-column layout, page 2: a full-width figure, a one-column table and figure, and the references">
+</p>
+<p align="center"><sub><code>\documentclass[brand=omicverse, twocolumn]{pdarticle}</code>, pages 1 and 2</sub></p>
+
+- `figure*` and `table*` span both columns. They float to the top of the next page, so define them one page before the place they should appear.
+- `figure` and `table` take one column.
+
+## Line numbers
+
+<p align="center">
   <img src="docs/images/omicverse-lineno-p2.png" width="49%" alt="single-column layout with line numbers, page 2">
 </p>
-<p align="center"><sub><code>twocolumn</code> (page 1) · <code>lineno</code> (page 2)</sub></p>
+<p align="center"><sub><code>lineno</code>, page 2</sub></p>
 
-- `twocolumn` gives two columns with a 13 pt gap. A full-width `figure*` floats to the top of the next page, so define it one page before the place it should appear.
-- `lineno` puts small gray line numbers in the right margin in the single-column layout, and on the outer side of each column in the two-column layout.
+`lineno` puts small gray line numbers in the right margin in the single-column layout, and on the outer side of each column in the two-column layout.
 
 ## Brands
 
