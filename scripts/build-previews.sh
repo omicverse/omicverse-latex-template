@@ -25,6 +25,7 @@ png previews/omicverse-rail.pdf        2 omicverse-rail-p2
 png previews/omicverse-masthead.pdf    1 omicverse-masthead-p1
 png previews/omicverse-panel.pdf       1 omicverse-panel-p1
 png previews/omicverse-twocolumn.pdf   1 omicverse-twocolumn-p1
+png previews/omicverse-twocolumn.pdf   2 omicverse-twocolumn-p2
 png previews/omicverse-lineno.pdf      2 omicverse-lineno-p2
 png previews/primordecode-rail.pdf     1 primordecode-rail-p1
 png example-zh.pdf                     1 zh-p1
